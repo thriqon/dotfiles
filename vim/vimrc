@@ -1,0 +1,83 @@
+"----------------
+"
+" Dotfiles
+"
+" (C) by thriqon
+"
+"----------------
+
+" VIM
+" ===
+
+" only use VIM
+set nocompatible
+
+" using fast tty, more optimized
+set ttyfast
+
+" enable modelines
+" searching 4 from top or bottom
+set modeline
+set modelines=4
+
+" color: dark
+set background=dark
+colorscheme darkblue
+
+" using foldmethod marker
+set foldmethod=marker
+
+" more information
+set ruler
+set number
+set title
+
+
+"" filetype-additions
+au BufRead,BufNewFile *.ypp             setfiletype yacc
+au BufRead,BufNewFile *.lpp             setfiletype lex 
+
+
+
+"" plugins
+
+" vim latex
+set grepprg=grep\ -nH\ $*
+let g:tex_flavor = "latex"
+set runtimepath=~/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,~/.vim/after
+
+"
+" NOTE: do this at the end!
+" enable filetype-plugin
+filetype plugin on
+filetype indent on
+
+syntax enable
+
+
+""
+" special keybindings
+
+map  <F5> :up<CR>:make<CR>
+map! <F5> <ESC>:up<CR>:make<CR>
+map  <F6> :make run<CR>
+map! <F6> <ESC>:make run<CR>
+map  <F7> :cn<CR>
+map  <F8> :cp<CR>
+
+map <F9>  :prev<CR>
+map <F10> :next<CR>
+
+map! <F4> <ESC>:set number!<CR>i
+map  <F4> :set number!<CR>
+
+" shortcuts for switching to next or prev
+nnoremap <C-N> :next<Enter>
+nnoremap <C-P> :prev<Enter>
+set confirm
+
+"" additions for some filetypes
+" using Sop and Serr for Java
+au BufRead,BufNewFile *.java	iab Sop System.out.println
+au BufRead,BufNewFile *.java	iab Serr System.err.println
+

@@ -9,7 +9,10 @@ my dotfiles, use git to clone. code:
 
 to setup stuff, execute:
 
-<code>install.sh</code>.
+<code>make install</code>
 
+to get back to state before install:
+
+<code>make uninstall</code>
 
 
