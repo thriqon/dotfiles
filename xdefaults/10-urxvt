@@ -1,0 +1,25 @@
+#----------------
+#
+# Dotfiles
+#
+# (C) by thriqon
+#
+#----------------
+
+# XDefaults
+# =========
+
+# xclock
+# ------
+
+xclock*hands:Red
+xclock*secondColor:RoyalBlue
+xclock*reverseVideo:yes
+xclock*hourColor:Red
+xclock*minuteColor:DarkBlue
+
+xclock*chime:false
+
+xclock*update:1
+
+# vim: set filetype=xdefaults:
