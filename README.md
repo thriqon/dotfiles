@@ -15,4 +15,15 @@ to get back to state before install:
 
 <code>make uninstall</code>
 
+-----------------------------------------
+
+new packages
+------------
+
+Makefile:
+
+	DEST=destfile
+	
+	include ../commons/Makefile
+
 
