@@ -1,0 +1,80 @@
+#----------------
+#
+# Dotfiles
+#
+# (C) by thriqon
+#
+#----------------
+
+# ZSH
+# ===
+
+# Completions
+# -----------
+
+
+# turn on completion
+autoload -U compinit
+compinit
+
+# these functions will be called
+zstyle ':completion:*' completer _expand _complete _ignored _approximate
+
+# maximum errors: 2
+zstyle ':completion:*'                 max-errors 2
+
+# match uppercase from lowercase
+zstyle ':completion:*'                 matcher-list 'm:{a-z}={A-Z}'
+
+# provide .. as a completion
+zstyle ':completion:*'                 special-dirs ..
+
+# provide verbose completion information
+zstyle ':completion:*'                 verbose true
+
+
+
+# describe options in full
+zstyle ':completion:*:options'         description 'yes'
+
+# Filename suffixes to ignore during completion (except after rm command)
+zstyle ':completion:*:*:(^rm):*:*files' ignored-patterns \
+					'*?.o' '*?.c~' \
+					'*?.old' '*?.pro' \
+					'*?.class' '*?.aux'
+
+# recent (as of Dec 2007) zsh versions are able to provide descriptions
+# for commands (read: 1st word in the line) that it will list for the user
+# to choose from. The following disables that, because it's not exactly fast.
+zstyle ':completion:*:-command-:*:'    verbose false
+
+# prompt correct
+zstyle ':completion:correct:'          prompt 'correct to: %e'
+
+# include original
+zstyle ':completion:*:correct:*'       original true
+
+# activate menu
+zstyle ':completion:*:history-words'   menu yes
+
+
+# Ignore completion functions for commands you don't have:
+zstyle ':completion::(^approximate*):*:functions' ignored-patterns '_*'
+
+# format on completion
+zstyle ':completion:*:descriptions'    format $'%{\e[0;31m%}completing %B%d%b%{\e[0m%}'
+
+# separate matches into groups
+zstyle ':completion:*:matches'         group 'yes'
+zstyle ':completion:*'                 group-name ''
+
+# complete manual by their section
+zstyle ':completion:*:manuals'         separate-sections true
+zstyle ':completion:*:manuals.*'       insert-sections   true
+zstyle ':completion:*:man:*'           menu yes select
+
+# warning
+zstyle ':completion:*:warnings' format 'No matches for: %d'
+
+# end of file
+# # vim: set filetype=zsh:

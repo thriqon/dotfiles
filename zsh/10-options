@@ -1,0 +1,34 @@
+#----------------
+#
+# Dotfiles
+#
+# (C) by thriqon
+#
+#----------------
+
+# ZSH
+# ===
+
+# Options
+# -------
+
+
+# list jobs in a "long"-list
+setopt LONG_LIST_JOBS
+
+# print bg-notifications immediately
+setopt NOTIFY
+
+# complete from both ends
+setopt COMPLETE_IN_WORD
+
+# share history between instances
+setopt SHARE_HISTORY
+
+# completion turn on
+setopt PROMPT_SUBST
+
+
+
+# end of file
+# # vim: set filetype=zsh:

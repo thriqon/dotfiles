@@ -1,0 +1,29 @@
+#----------------
+#
+# Dotfiles
+#
+# (C) by thriqon
+#
+#----------------
+
+# ZSH
+# ===
+
+# Env Vars
+# --------
+
+# EDTITOR
+export EDITOR=vim
+
+# COLORTERM
+export COLORTERM="yes"
+
+
+# HISTORY
+HISTFILE=~/.histfile
+HISTSIZE=50000
+SAVEHIST=100000
+
+
+# end of file
+# vim: set filetype=zsh:

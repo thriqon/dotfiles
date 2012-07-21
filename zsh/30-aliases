@@ -1,0 +1,27 @@
+#----------------
+#
+# Dotfiles
+#
+# (C) by thriqon
+#
+#----------------
+
+# ZSH
+# ===
+
+# Aliases
+# ---------
+
+
+# ls will be colored
+alias    ls='ls -CF --color=auto'
+
+# few commands should not be auto-corrected
+alias mkdir='nocorrect mkdir'
+alias    mv='nocorrect mv'
+alias    cp='nocorrect cp'
+alias touch='nocorrect touch'
+alias   scp='nocorrect scp'
+
+# end of file
+# vim: set filetype=zsh:

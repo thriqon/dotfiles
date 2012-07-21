@@ -1,0 +1,45 @@
+#----------------
+#
+# Dotfiles
+#
+# (C) by thriqon
+#
+#----------------
+
+# ZSH
+# ===
+
+# Functions
+# ---------
+
+
+# finding BROWSER
+if [[ -n "$DISPLAY" ]];
+then
+	BROWSER=firefox
+else
+	BROWSER=w3m
+fi
+
+
+# open parameter in browser
+go ()
+{
+	${BROWSER} $1
+}
+
+# open article in german wikipedia
+wiki()
+{
+	${BROWSER} http://de.wikipedia.org/wiki/$1
+}
+
+# open article in english wikipeda
+wikien()
+{
+	${BROWSER} http://en.wikipedia.org/wiki/$1
+}
+
+
+# end of file
+# vim: set filetype=zsh:

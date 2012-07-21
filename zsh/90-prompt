@@ -1,0 +1,115 @@
+#----------------
+#
+# Dotfiles
+#
+# (C) by thriqon
+#
+#----------------
+
+# ZSH
+# ===
+
+# Env Vars
+# --------
+
+
+if zrcautoload colors && colors 2>/dev/null ; then
+    BLUE="%{${fg[blue]}%}"
+    RED="%{${fg_bold[red]}%}"
+    GREEN="%{${fg[green]}%}"
+    CYAN="%{${fg[cyan]}%}"
+    MAGENTA="%{${fg[magenta]}%}"
+    YELLOW="%{${fg[yellow]}%}"
+    WHITE="%{${fg[white]}%}"
+    NO_COLOUR="%{${reset_color}%}"
+else
+    BLUE=$'%{\e[1;34m%}'
+    RED=$'%{\e[1;31m%}'
+    GREEN=$'%{\e[1;32m%}'
+    CYAN=$'%{\e[1;36m%}'
+    WHITE=$'%{\e[1;37m%}'
+    MAGENTA=$'%{\e[1;35m%}'
+    YELLOW=$'%{\e[1;33m%}'
+    NO_COLOUR=$'%{\e[0m%}'
+fi
+
+
+
+if zrcautoload vcs_info; then
+    # `vcs_info' in zsh versions 4.3.10 and below have a broken `_realpath'
+    # function, which can cause a lot of trouble with our directory-based
+    # profiles. So:
+    if [[ ${ZSH_VERSION} == 4.3.<-10> ]] ; then
+        function VCS_INFO_realpath () {
+            setopt localoptions NO_shwordsplit chaselinks
+            ( builtin cd -q $1 2> /dev/null && pwd; )
+        }
+    fi
+
+    zstyle ':vcs_info:*' max-exports 2
+
+    if [[ -o restricted ]]; then
+        zstyle ':vcs_info:*' enable NONE
+    fi
+fi
+
+if [[ "$TERM" == dumb ]] ; then
+    zstyle ':vcs_info:*' actionformats "(%s%)-[%b|%a] " "zsh: %r"
+    zstyle ':vcs_info:*' formats       "(%s%)-[%b] "    "zsh: %r"
+else
+    # these are the same, just with a lot of colours:
+    zstyle ':vcs_info:*' actionformats "${MAGENTA}(${NO_COLOUR}%s${MAGENTA})${YELLOW}-${MAGENTA}[${GREEN}%b${YELLOW}|${RED}%a${MAGENTA}]${NO_COLOUR} " \
+                                       "zsh: %r"
+    zstyle ':vcs_info:*' formats       "${MAGENTA}(${NO_COLOUR}%s${MAGENTA})${YELLOW}-${MAGENTA}[${GREEN}%b${MAGENTA}]${NO_COLOUR}%} " \
+                                       "zsh: %r"
+    zstyle ':vcs_info:(sv[nk]|bzr):*' branchformat "%b${RED}:${YELLOW}%r"
+fi
+
+
+
+EXITCODE="%(?..%?%1v )"
+
+if (( EUID != 0 )); then
+	PROMPT="${RED}${EXITCODE}${CYAN}%n${NO_COLOUR}@%m %40<...<%B%~%b%<< "
+else
+	PROMPT="${CYAN}${EXITCODE}${RED}%n${NO_COLOUR}@%m %40<...<%B%~%b%<< "
+fi
+
+PROMPT="${PROMPT}"'${vcs_info_msg_0_}'"%# "
+
+RPROMPT="${MAGENTA}%* %D${NO_COLOUR}"
+
+function ESC_print () {
+    info_print $'\ek' $'\e\\' "$@"
+}
+function set_title () {
+    info_print  $'\e]0;' $'\a' "$@"
+}
+
+function info_print () {
+    local esc_begin esc_end
+    esc_begin="$1"
+    esc_end="$2"
+    shift 2
+    printf '%s' ${esc_begin}
+    printf '%s' "$*"
+    printf '%s' "${esc_end}"
+}
+
+
+precmd()
+{
+	vcs_info
+
+
+	case $TERM in
+        (xterm*|rxvt*)
+            set_title ${(%):-"%n@%m: %~"}
+            ;;
+    esac
+
+}
+
+
+# end of file
+# vim: set filetype=zsh:

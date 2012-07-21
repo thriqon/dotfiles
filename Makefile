@@ -1,9 +1,10 @@
 
+DEST=vim xdefaults zsh
 
 install:
-	make -C vim install
+	for i in $(DEST); do make -C $$i install ; done
 
 uninstall:
-	make -C vim uninstall
+	for i in $(DEST); do make -C $$i uninstall ; done
 
 
